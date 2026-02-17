@@ -10,17 +10,9 @@ const apiClient = axios.create({
   },
 });
 
-// Request interceptor to add auth token and ensure trailing slashes
+// Request interceptor to add auth token
 apiClient.interceptors.request.use(
   (config) => {
-    // Add trailing slash to prevent 307 redirects from FastAPI
-    if (config.url && !config.url.endsWith('/') && !config.url.includes('?')) {
-      config.url = config.url + '/';
-    } else if (config.url && config.url.includes('?') && !config.url.split('?')[0].endsWith('/')) {
-      const [path, query] = config.url.split('?');
-      config.url = path + '/?' + query;
-    }
-
     const token = localStorage.getItem('access_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -125,7 +117,7 @@ export const geointAPI = {
 
   // Get system overview
   getOverview: async () => {
-    const response = await apiClient.get('/geoint/overview');
+    const response = await apiClient.get('/geoint/overview/');
     return response.data;
   },
 
@@ -169,7 +161,7 @@ export const geointAPI = {
 export const keywordsAPI = {
   // Get all keywords for current user
   getAll: async () => {
-    const response = await apiClient.get('/keywords');
+    const response = await apiClient.get('/keywords/');
     return response.data;
   },
 
@@ -204,7 +196,7 @@ export const keywordsAPI = {
 export const strategyAPI = {
   // Get all strategies
   getAll: async () => {
-    const response = await apiClient.get('/strategies');
+    const response = await apiClient.get('/strategies/');
     return response.data;
   },
 
@@ -287,7 +279,7 @@ export const strategyAPI = {
 export const competitorsAPI = {
   // Get all tracked competitors
   getAll: async () => {
-    const response = await apiClient.get('/competitors');
+    const response = await apiClient.get('/competitors/');
     return response.data;
   },
 
@@ -394,7 +386,7 @@ export const competitorsAPI = {
 
   // Get market overview
   getMarketOverview: async (userDomain = null) => {
-    const response = await apiClient.get('/competitors/market-overview', {
+    const response = await apiClient.get('/competitors/market-overview/', {
       params: { user_domain: userDomain }
     });
     return response.data;
@@ -407,13 +399,13 @@ export const competitorsAPI = {
 export const mediaAPI = {
   // Get media mentions
   getMentions: async (params) => {
-    const response = await apiClient.get('/media/mentions', { params });
+    const response = await apiClient.get('/media/mentions/', { params });
     return response.data;
   },
 
   // Get PR opportunities
   getOpportunities: async () => {
-    const response = await apiClient.get('/media/opportunities');
+    const response = await apiClient.get('/media/opportunities/');
     return response.data;
   },
 
@@ -436,25 +428,25 @@ export const mediaAPI = {
 export const dashboardAPI = {
   // Get main dashboard stats
   getStats: async () => {
-    const response = await apiClient.get('/dashboard/stats');
+    const response = await apiClient.get('/dashboard/stats/');
     return response.data;
   },
 
   // Get GEOINT trend data
   getGeointTrend: async (days = 30) => {
-    const response = await apiClient.get(`/dashboard/geoint-trend?days=${days}`);
+    const response = await apiClient.get(`/dashboard/geoint-trend/?days=${days}`);
     return response.data;
   },
 
   // Get keyword performance data
   getKeywordPerformance: async () => {
-    const response = await apiClient.get('/dashboard/keyword-performance');
+    const response = await apiClient.get('/dashboard/keyword-performance/');
     return response.data;
   },
 
   // Get regional distribution data
   getRegionalDistribution: async (regionType = 'il', limit = 10) => {
-    const response = await apiClient.get('/dashboard/regional-distribution', {
+    const response = await apiClient.get('/dashboard/regional-distribution/', {
       params: { region_type: regionType, limit }
     });
     return response.data;
@@ -462,19 +454,19 @@ export const dashboardAPI = {
 
   // Get strategy progress
   getStrategyProgress: async () => {
-    const response = await apiClient.get('/dashboard/strategy-progress');
+    const response = await apiClient.get('/dashboard/strategy-progress/');
     return response.data;
   },
 
   // Get recent activities
   getActivities: async (limit = 10) => {
-    const response = await apiClient.get(`/dashboard/activities?limit=${limit}`);
+    const response = await apiClient.get(`/dashboard/activities/?limit=${limit}`);
     return response.data;
   },
 
   // Get complete dashboard overview (all data in one call)
   getOverview: async () => {
-    const response = await apiClient.get('/dashboard/overview');
+    const response = await apiClient.get('/dashboard/overview/');
     return response.data;
   },
 };
