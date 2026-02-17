@@ -10,9 +10,17 @@ const apiClient = axios.create({
   },
 });
 
-// Request interceptor to add auth token
+// Request interceptor to add auth token and ensure trailing slashes
 apiClient.interceptors.request.use(
   (config) => {
+    // Add trailing slash to prevent 307 redirects from FastAPI
+    if (config.url && !config.url.endsWith('/') && !config.url.includes('?')) {
+      config.url = config.url + '/';
+    } else if (config.url && config.url.includes('?') && !config.url.split('?')[0].endsWith('/')) {
+      const [path, query] = config.url.split('?');
+      config.url = path + '/?' + query;
+    }
+
     const token = localStorage.getItem('access_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
