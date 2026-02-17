@@ -1,0 +1,346 @@
+/**
+ * Bento Grid System - Stratyon Platform
+ * Apple-inspired card-based layout system with dark mode support
+ */
+
+/* ========== BENTO GRID BASE ========== */
+
+.bento-grid {
+  display: grid;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* ========== RESPONSIVE GRID TEMPLATES ========== */
+
+.bento-grid-1 {
+  grid-template-columns: 1fr;
+}
+
+.bento-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.bento-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.bento-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.bento-grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* ========== BENTO CARDS ========== */
+
+.bento-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  transition: all var(--duration) var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark mode base card */
+:is(.dark) .bento-card {
+  background: var(--bg-card);
+  border-color: var(--border-primary);
+}
+
+.bento-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--brand-light);
+}
+
+:is(.dark) .bento-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(129, 140, 248, 0.5);
+}
+
+.bento-card-interactive {
+  cursor: pointer;
+}
+
+.bento-card-interactive:active {
+  transform: translateY(0);
+}
+
+/* ========== BENTO CARD SIZES ========== */
+
+.bento-card-xs {
+  min-height: 120px;
+  padding: 1rem;
+}
+
+.bento-card-sm {
+  min-height: 200px;
+}
+
+.bento-card-md {
+  min-height: 300px;
+}
+
+.bento-card-lg {
+  min-height: 400px;
+}
+
+.bento-card-xl {
+  min-height: 500px;
+}
+
+.bento-card-auto {
+  min-height: auto;
+}
+
+/* ========== BENTO CARD SPANS (Asymmetric Layouts) ========== */
+
+.bento-span-2 {
+  grid-column: span 2;
+}
+
+.bento-span-3 {
+  grid-column: span 3;
+}
+
+.bento-span-4 {
+  grid-column: span 4;
+}
+
+.bento-span-full {
+  grid-column: 1 / -1;
+}
+
+.bento-row-span-2 {
+  grid-row: span 2;
+}
+
+.bento-row-span-3 {
+  grid-row: span 3;
+}
+
+/* ========== BENTO CARD VARIANTS ========== */
+
+.bento-card-gradient {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+  color: white;
+  border: none;
+}
+
+:is(.dark) .bento-card-gradient {
+  background: linear-gradient(135deg, var(--brand-dark) 0%, #0891b2 100%);
+}
+
+.bento-card-gradient:hover {
+  box-shadow: 0 20px 40px -12px rgba(99, 102, 241, 0.4);
+}
+
+.bento-card-bordered {
+  border: 2px solid var(--brand-light);
+}
+
+:is(.dark) .bento-card-bordered {
+  border-color: var(--brand-dark);
+}
+
+.bento-card-elevated {
+  box-shadow: var(--shadow-sm);
+}
+
+:is(.dark) .bento-card-elevated {
+  box-shadow: var(--shadow-md);
+}
+
+.bento-card-flat {
+  border: none;
+  box-shadow: none;
+}
+
+.bento-card-primary {
+  background: rgba(99, 102, 241, 0.05);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+:is(.dark) .bento-card-primary {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.bento-card-accent {
+  background: rgba(6, 182, 212, 0.05);
+  border-color: rgba(6, 182, 212, 0.2);
+}
+
+:is(.dark) .bento-card-accent {
+  background: rgba(6, 182, 212, 0.1);
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+.bento-card-success {
+  background: var(--success-light);
+  border-color: var(--success);
+}
+
+:is(.dark) .bento-card-success {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.bento-card-warning {
+  background: var(--warning-light);
+  border-color: var(--warning);
+}
+
+:is(.dark) .bento-card-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.bento-card-danger {
+  background: var(--error-light);
+  border-color: var(--error);
+}
+
+:is(.dark) .bento-card-danger {
+  background: rgba(244, 63, 94, 0.1);
+  border-color: rgba(244, 63, 94, 0.3);
+}
+
+/* ========== BENTO CARD CONTENT ========== */
+
+.bento-card-header {
+  margin-bottom: 1rem;
+}
+
+.bento-card-title {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+:is(.dark) .bento-card-title {
+  color: var(--text-primary);
+}
+
+.bento-card-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0.5rem 0 0 0;
+  line-height: 1.5;
+}
+
+:is(.dark) .bento-card-description {
+  color: var(--text-secondary);
+}
+
+.bento-card-body {
+  flex: 1;
+}
+
+.bento-card-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-primary);
+}
+
+:is(.dark) .bento-card-footer {
+  border-top-color: var(--border-primary);
+}
+
+/* ========== BENTO CARD ICONS ========== */
+
+.bento-card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--brand);
+  margin-bottom: 1rem;
+}
+
+:is(.dark) .bento-card-icon {
+  background: rgba(129, 140, 248, 0.2);
+  color: var(--brand-light);
+}
+
+.bento-card-icon-sm {
+  width: 32px;
+  height: 32px;
+}
+
+.bento-card-icon-lg {
+  width: 64px;
+  height: 64px;
+}
+
+/* ========== RESPONSIVE BENTO ========== */
+
+@media (max-width: 1024px) {
+  .bento-grid-4,
+  .bento-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bento-span-3,
+  .bento-span-4 {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .bento-grid-2,
+  .bento-grid-3,
+  .bento-grid-4,
+  .bento-grid-auto {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-span-2,
+  .bento-span-3,
+  .bento-span-4 {
+    grid-column: span 1;
+  }
+
+  .bento-card {
+    padding: 1rem;
+  }
+
+  .bento-card-xs {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .bento-grid {
+    gap: 1rem;
+  }
+}
+
+/* ========== BENTO UTILITIES ========== */
+
+.bento-gap-sm {
+  gap: 1rem;
+}
+
+.bento-gap-md {
+  gap: 1.5rem;
+}
+
+.bento-gap-lg {
+  gap: 2rem;
+}
+
+.bento-no-hover:hover {
+  transform: none;
+  box-shadow: none;
+}
